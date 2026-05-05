@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Shaukat Ali — Ruby on Rails Developer</title>
+<meta name="description" content="Portfolio of Shaukat Ali — Ruby on Rails developer with 4 years experience.">
+<style>
+  /* --- Reset & Base --- */
+  :root{
+    --bg:#071021; --card:#0f1b2b; --accent:#6ce2b8; --muted:#8aa0b3; --glass: rgba(255,255,255,0.04);
+    --glass-2: rgba(255,255,255,0.02);
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body,#app{height:100%}
+  body{
+    font-family:var(--font-sans);
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(108,226,184,0.06), transparent 6%), 
+                linear-gradient(180deg, rgba(255,255,255,0.015), transparent 25%),
+                var(--bg);
+    color:#eaf7f0;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+    padding:24px;
+  }
+
+  /* --- Container --- */
+  .container{max-width:1100px;margin:0 auto;}
+
+  /* --- Header / Nav --- */
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{
+    width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#60a7ff);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:#042029;box-shadow:0 6px 18px rgba(108,226,184,0.06);
+  }
+  nav{display:flex;gap:14px}
+  nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
+  nav a.active, nav a:hover{color:#042029;background:linear-gradient(90deg,var(--accent),#60a7ff);box-shadow:0 6px 18px rgba(6,90,60,0.12)}
+
+  /* --- Hero --- */
+  .hero{
+    display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;padding:28px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    box-shadow: 0 10px 30px rgba(2,8,20,0.6);position:relative;overflow:hidden;
+  }
+  .hero-left{padding-right:8px}
+  h1{font-size:32px;margin-bottom:10px;letter-spacing:0.2px}
+  .tagline{color:var(--muted);margin-bottom:18px}
+  .typing{color:var(--accent);font-weight:700}
+  .cta-row{display:flex;gap:12px;margin-top:16px}
+  .btn{
+    padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;
+    background:linear-gradient(90deg,var(--accent),#60a7ff);color:#042029;
+    box-shadow:0 8px 20px rgba(96,167,255,0.08)
+  }
+  .secondary{
+    background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)
+  }
+
+  /* --- Card right (profile) --- */
+  .profile{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;align-items:center;
+    backdrop-filter: blur(6px);
+  }
+  .avatar{width:120px;height:120px;border-radius:14px;background:linear-gradient(135deg,#fff0 0%, rgba(255,255,255,0.04)), url('') center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:36px;color:var(--accent)}
+  .meta{color:var(--muted);text-align:center}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .chip{background:var(--glass);padding:6px 10px;border-radius:999px;font-weight:600;color:var(--muted);font-size:13px}
+
+  /* --- Particles (simple) --- */
+  #particles{
+    position:absolute;inset:0;pointer-events:none;opacity:0.32;mix-blend-mode:screen;
+  }
+
+  /* --- Sections --- */
+  section{margin-top:28px}
+  .section-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .section-header h2{font-size:18px}
+  .grid{display:grid;gap:14px}
+
+  /* Projects */
+  .projects{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));
+    padding:14px;border-radius:12px;box-shadow:0 8px 20px rgba(2,8,20,0.5);transform:translateY(0);
+    transition:transform .36s cubic-bezier(.2,.9,.3,1),box-shadow .36s;
+    overflow:hidden;position:relative;
+  }
+  .card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,8,20,0.6)}
+  .project-title{font-weight:800;margin-bottom:8px}
+  .project-desc{color:var(--muted);font-size:14px;margin-bottom:10px}
+  .project-tags{display:flex;gap:8px;flex-wrap:wrap}
+  .tag{background:var(--glass-2);padding:6px 8px;border-radius:8px;font-size:13px;color:var(--muted)}
+
+  /* Skills */
+  .skills{grid-template-columns:repeat(2,1fr)}
+  .skill{background:var(--glass);padding:10px;border-radius:10px}
+  .skill-name{display:flex;justify-content:space-between;margin-bottom:8px;color:var(--muted);font-weight:700}
+  .bar{height:10px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#60a7ff);width:0%;transition:width 1.1s cubic-bezier(.2,.9,.3,1)}
+
+  /* Contact */
+  .contact-form{display:grid;gap:10px}
+  .input, .textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:10px;color:inherit}
+  .textarea{min-height:110px;resize:vertical}
+  footer{margin-top:28px;color:var(--muted);font-size:14px;text-align:center;padding:18px 12px}
+
+  /* --- Responsive --- */
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr; padding:18px}
+    .projects{grid-template-columns:repeat(2,1fr)}
+    .skills{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    nav{display:none}
+    .projects{grid-template-columns:1fr}
+    header{flex-direction:column;align-items:flex-start;gap:12px}
+    h1{font-size:24px}
+  }
+
+  /* subtle entrance animations */
+  .reveal{opacity:0;transform:translateY(10px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.9,.3,1)}
+  .reveal.show{opacity:1;transform:none}
+</style>
+</head>
+<body>
+  <div class="container" id="app">
+    <header>
+      <div class="brand">
+        <div class="logo">SA</div>
+        <div>
+          <div style="font-weight:800">Shaukat Ali</div>
+          <div style="font-size:13px;color:var(--muted)">Ruby on Rails developer • 4 years</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <canvas id="particles"></canvas>
+
+        <div class="hero-left">
+          <h1 class="reveal">Hi — I'm Shaukat Ali</h1>
+          <div class="tagline reveal" style="transition-delay:.06s">
+            Rails developer focused on clean backends, APIs, & performant full-stack features. I worked at Chetu Inc — primarily with US & UK clients.
+          </div>
+          <div class="typing reveal" id="typing" style="transition-delay:.12s">Build APIs · Optimize Apps · Client communication</div>
+
+          <div class="cta-row reveal" style="transition-delay:.18s">
+            <button class="btn" id="downloadBtn">Download CV</button>
+            <a href="#contact" class="btn secondary">Contact Me</a>
+          </div>
+        </div>
+
+        <aside class="profile reveal" style="transition-delay:.24s">
+          <div class="avatar">SA</div>
+          <div class="meta">
+            Rails • PostgreSQL • Redis • Sidekiq<br>
+            TDD, CI/CD, REST & GraphQL
+          </div>
+          <div class="chips">
+            <div class="chip">4 yrs experience</div>
+            <div class="chip">Chetu Inc</div>
+            <div class="chip">US & UK clients</div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="projects">
+        <div class="section-header">
+          <h2>Selected Projects</h2>
+        </div>
+        <div class="grid projects reveal" id="projectsGrid">
+          <!-- project cards injected by JS -->
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-header">
+          <h2>Skills</h2>
+        </div>
+        <div class="grid skills reveal" id="skillGrid">
+          <!-- skill items injected by JS -->
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="section-header">
+          <h2>Experience</h2>
+        </div>
+
+        <div class="card reveal" style="max-width:900px">
+          <div style="font-weight:800;font-size:16px;margin-bottom:6px">
+            ROR Developer (3+ Years)
+          </div>
+
+          <div style="color:var(--muted);margin-bottom:10px">
+            Chetu Inc - Sector 63, Noida, Uttar Pradesh<br>
+            Jan 2022 – Nov 2025
+          </div>
+
+          <div style="margin-bottom:10px">
+            Ruby on Rails developer with 3.10+ years of experience building scalable web applications.
+            Worked with US & UK clients delivering production-grade systems using Rails, JavaScript,
+            and PostgreSQL.
+          </div>
+
+          <ul style="padding-left:18px;color:var(--muted);line-height:1.6">
+            <li>Developed and maintained multiple Ruby on Rails applications.</li>
+            <li>Built and consumed REST APIs and handled third-party integrations.</li>
+            <li>Worked with PostgreSQL for efficient data management and optimization.</li>
+            <li>Collaborated with international clients (US & UK) and delivered requirements on time.</li>
+            <li>Managed version control using Git (branching, merging, conflict resolution).</li>
+            <li>Followed best practices including clean code, testing, and performance optimization.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-header"><h2>Contact</h2></div>
+        <div class="card contact-form reveal" style="max-width:760px">
+          <input class="input" placeholder="Your name" />
+          <input class="input" placeholder="Your email" />
+          <input class="input" placeholder="Subject" />
+          <textarea class="textarea" placeholder="Message"></textarea>
+          <div style="display:flex;gap:10px;justify-content:flex-end">
+            <button class="btn" id="sendBtn">Send message</button>
+            <button class="btn secondary" id="copyEmail">Copy email</button>
+          </div>
+          <div style="color:var(--muted);font-size:13px;margin-top:8px"></div>
+        </div>
+      </section>
+
+      <footer>© <span id="year"></span> Shaukat Ali — Ruby on Rails Developer</footer>
+    </main>
+  </div>
+
+<script>
+  /* Small utilities & data */
+  const projects = [
+    {
+      title: "Freepour",
+      desc: "Worked on a third-party API-based system. Consumed client-provided endpoints, fetched JSON data using Postman, imported structured data into the database, and generated CSV exports for reporting and analysis.",
+      tags: ["Rails", "API Integration", "Postman", "CSV Export", "Data Handling"]
+    },
+    {
+      title: "ExpertBonded Inspection",
+      desc: "Built features for a construction inspection platform where engineers upload site images and data. Implemented PDF export functionality for reports and maintained codebase using Git version control.",
+      tags: ["Rails", "PDF Generation", "File Uploads", "Git", "Backend"]
+    },
+    {
+      title: "NeoFinance",
+      desc: "Developed a car finance management system enabling interaction between multiple lenders and users. Designed modules for managing lender data, user workflows, and tracking the full car purchasing lifecycle.",
+      tags: ["Rails", "System Design", "PostgreSQL", "Business Logic"]
+    },
+    {
+      title: "Event Power (Current Project)",
+      desc: "Currently working on an event management platform with features like scheduling, user interactions, and scalable backend systems. Focused on performance, API handling, and real-time data flow.",
+      tags: ["Rails", "API", "Performance", "Real-time", "Backend"]
+    }
+  ];
+
+  const skills = [
+    {name:"Ruby on Rails", level:95},
+    {name:"PostgreSQL", level:88},
+    {name:"Background Jobs (Sidekiq)", level:86},
+    {name:"API Design (REST)", level:92},
+    {name:"Testing (RSpec)", level:84},
+    {name:"Docker / CI-CD", level:78},
+    {name:"JavaScript & jQuery", level:88},
+    {name:"Bootstrap", level:85},
+    {name:"CSS", level:85},
+    {name:"HTML", level:90}
+  ];
+
+  // Populate projects and skills
+  const projectsGrid = document.getElementById('projectsGrid');
+  projects.forEach((p,i)=>{
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.style.transitionDelay = (i*60)+'ms';
+    div.innerHTML = `
+      <div class="project-title">${p.title}</div>
+      <div class="project-desc">${p.desc}</div>
+      <div class="project-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    `;
+    projectsGrid.appendChild(div);
+  });
+
+  const skillGrid = document.getElementById('skillGrid');
+  skills.forEach((s,i)=>{
+    const el = document.createElement('div');
+    el.className = 'skill';
+    el.style.transitionDelay = (i*60)+'ms';
+    el.innerHTML = `
+      <div class="skill-name"><span>${s.name}</span><span>${s.level}%</span></div>
+      <div class="bar"><i style="width:0%" data-val="${s.level}"></i></div>
+    `;
+    skillGrid.appendChild(el);
+  });
+
+  // Reveal on load/scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('show'); }
+    });
+  }, {threshold:0.12});
+  reveals.forEach(r=>obs.observe(r));
+
+  // Animate skill bars when in view
+  const bars = document.querySelectorAll('.bar > i');
+  const barObs = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        const el = en.target;
+        const val = el.getAttribute('data-val');
+        el.style.width = val + '%';
+        barObs.unobserve(el);
+      }
+    });
+  }, {threshold: 0.2});
+  bars.forEach(b=>barObs.observe(b));
+
+  // Typing effect
+  const typingEl = document.getElementById('typing');
+  const phrases = ["Building robust Rails backends.", "Communicating with US & UK clients.", "Delivering tests and documentation."];
+  let pi=0, ci=0;
+  function typeLoop(){
+    const full = phrases[pi];
+    typingEl.textContent = full.slice(0,++ci);
+    if(ci===full.length){ setTimeout(()=>{ erase(); }, 1100); } else setTimeout(typeLoop, 40);
+  }
+  function erase(){
+    typingEl.textContent = typingEl.textContent.slice(0,--ci);
+    if(ci===0){ pi=(pi+1)%phrases.length; setTimeout(typeLoop,300); } else setTimeout(erase,24);
+  }
+  setTimeout(typeLoop,800);
+
+  // Particles (simple canvas based)
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, parts = [];
+  function resize(){ W = canvas.width = canvas.clientWidth; H = canvas.height = canvas.clientHeight; }
+  window.addEventListener('resize', resize);
+  resize();
+  function spawn(n=60){
+    parts = [];
+    for(let i=0;i<n;i++){
+      parts.push({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        r: Math.random()*1.6+0.4,
+        vx: (Math.random()-0.5)*0.25,
+        vy: (Math.random()-0.5)*0.25,
+        alpha: Math.random()*0.6+0.12
+      });
+    }
+  }
+  spawn(56);
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let p of parts){
+      p.x += p.vx; p.y += p.vy;
+      if(p.x<0) p.x=W; if(p.x>W) p.x=0;
+      if(p.y<0) p.y=H; if(p.y>H) p.y=0;
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(108,226,184,${p.alpha})`;
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Download CV / copy email / send placeholder
+  document.getElementById('downloadBtn').addEventListener('click', ()=>{
+    // small generated CV stub
+    const cv = `Shaukat Ali - Ruby on Rails Developer\nExperience: 4 years\nCompanies: Chetu Inc (US & UK clients)\nSkills: Ruby on Rails, PostgreSQL, Sidekiq, Redis, RSpec\nContact: shaukat2108ali@gmail.com`;
+    const blob = new Blob([cv], {type:'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'Shaukat_Ali_CV.txt'; a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById('copyEmail').addEventListener('click', ()=>{
+    const email = 'shaukat2108ali@gmail.com';
+    navigator.clipboard?.writeText(email).then(()=> alert('Email copied to clipboard.'));
+  });
+
+  document.getElementById('sendBtn').addEventListener('click', ()=>{
+    alert('This is a placeholder. Implement form submission logic or mailto link.');
+  });
+
+  // Smooth scroll for nav
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Simple reveal on initial load
+  window.addEventListener('load', ()=> {
+    document.querySelectorAll('.reveal').forEach((el, idx)=>{
+      setTimeout(()=> el.classList.add('show'), 160 + idx*60);
+    });
+  });
+</script>
+</body>
+</html>
